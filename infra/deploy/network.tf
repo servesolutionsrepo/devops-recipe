@@ -148,7 +148,6 @@ resource "aws_vpc_endpoint" "ecr" {
   private_dns_enabled = true
 
   subnet_ids         = [aws_subnet.private_a.id, aws_subnet.private_b.id]
-  route_table_ids    = [aws_route_table.public_a.id, aws_route_table.public_b.id]
   security_group_ids = [aws_security_group.endpoint_access.id]
 
   tags = {
@@ -163,7 +162,6 @@ resource "aws_vpc_endpoint" "dkr" {
   private_dns_enabled = true
 
   subnet_ids         = [aws_subnet.private_a.id, aws_subnet.private_b.id]
-  route_table_ids    = [aws_route_table.public_a.id, aws_route_table.public_b.id]
   security_group_ids = [aws_security_group.endpoint_access.id]
 
   tags = {
@@ -178,7 +176,6 @@ resource "aws_vpc_endpoint" "cloudwatch_logs" {
   private_dns_enabled = true
 
   subnet_ids         = [aws_subnet.private_a.id, aws_subnet.private_b.id]
-  route_table_ids    = [aws_route_table.public_a.id, aws_route_table.public_b.id]
   security_group_ids = [aws_security_group.endpoint_access.id]
 
   tags = {
@@ -193,7 +190,6 @@ resource "aws_vpc_endpoint" "ssm" {
   private_dns_enabled = true
 
   subnet_ids         = [aws_subnet.private_a.id, aws_subnet.private_b.id]
-  route_table_ids    = [aws_route_table.public_a.id, aws_route_table.public_b.id]
   security_group_ids = [aws_security_group.endpoint_access.id]
 
   tags = {
@@ -205,7 +201,6 @@ resource "aws_vpc_endpoint" "s3" {
   vpc_id              = aws_vpc.main.id
   service_name        = "com.amazonaws.${data.aws_region.current.name}.s3"
   vpc_endpoint_type   = "Gateway"
-  private_dns_enabled = true
   # Note: S3 endpoints do not require subnet_ids or security_group_ids
   route_table_ids = [aws_vpc.main.default_route_table_id]
 
