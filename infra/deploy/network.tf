@@ -201,7 +201,7 @@ resource "aws_vpc_endpoint" "s3" {
   vpc_id              = aws_vpc.main.id
   service_name        = "com.amazonaws.${data.aws_region.current.name}.s3"
   vpc_endpoint_type   = "Gateway"
-  # Note: S3 endpoints do not require subnet_ids or security_group_ids
+  # Note: S3 endpoints (gateway) do not require subnet_ids or security_group_ids
   route_table_ids = [aws_vpc.main.default_route_table_id]
 
   tags = {
