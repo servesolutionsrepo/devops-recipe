@@ -22,13 +22,6 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: set vars
-        run: |
-          if [[ $GITHUB_REF  == 'refs/heads/prod' ]]; then
-            echo "prod" > .workspace
-          else
-            echo "staging" > .workspace
-          fi
       - name: Test
         run: docker compose run --rm app sh -c "python manage.py wait_for_db && python manage.py test"
       - name: Python flake8
@@ -53,7 +46,6 @@ jobs:
           TF_VAR_django_secret_key: ${{ secrets.TF_VAR_DJANGO_SECRET_KEY }}
         run: |
           cd infra/
-          workspace=$(cat .workspace)
           docker compose run --rm terraform -chdir=deploy/ init -backend=false
           docker compose run --rm terraform -chdir=setup/ init -backend=false
           docker compose run --rm terraform -chdir=setup/ validate
