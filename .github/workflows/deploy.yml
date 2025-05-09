@@ -33,6 +33,7 @@ jobs:
           # Export TF_WORKSPACE dynamically
           workspace=$(cat .workspace)
           echo "TF_WORKSPACE=$workspace" >> $GITHUB_ENV
+          export TF_WORKSPACE=$workspace
       - name: Push to ECR
         env:
           AWS_ACCESS_KEY_ID: ${{ vars.AWS_ACCESS_KEY_ID }}
