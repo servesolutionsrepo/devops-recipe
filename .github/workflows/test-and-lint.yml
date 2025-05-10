@@ -11,7 +11,7 @@ on:
         description: "Docker Hub token"
 
 jobs:
-  Python:
+  python:
     name: Python
     runs-on: ubuntu-22.04
     steps:
