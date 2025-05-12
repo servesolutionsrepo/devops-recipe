@@ -36,7 +36,7 @@ resource "aws_subnet" "public_a" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "${locals.prefix}-public-a"
+    Name = "${local.prefix}-public-a"
   }
 
 }
