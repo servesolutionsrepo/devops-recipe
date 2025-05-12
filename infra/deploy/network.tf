@@ -36,7 +36,7 @@ resource "aws_subnet" "public_a" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "${local.prefix}-public-a"
+    Name = "${locals.prefix}-public-a"
   }
 
 }
@@ -198,9 +198,9 @@ resource "aws_vpc_endpoint" "ssm" {
 }
 
 resource "aws_vpc_endpoint" "s3" {
-  vpc_id              = aws_vpc.main.id
-  service_name        = "com.amazonaws.${data.aws_region.current.name}.s3"
-  vpc_endpoint_type   = "Gateway"
+  vpc_id            = aws_vpc.main.id
+  service_name      = "com.amazonaws.${data.aws_region.current.name}.s3"
+  vpc_endpoint_type = "Gateway"
   # Note: S3 endpoints (gateway) do not require subnet_ids or security_group_ids
   route_table_ids = [aws_vpc.main.default_route_table_id]
 
