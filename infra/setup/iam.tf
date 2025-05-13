@@ -178,7 +178,22 @@ data "aws_iam_policy_document" "rds" {
       "rds:DeleteDBInstance",
       "rds:ListTagsForResource",
       "rds:ModifyDBInstance",
-      "rds:AddTagsToResource"
+      "rds:AddTagsToResource",
+      # Needed if RDS hasn't yet created its service-linked role
+      "iam:CreateServiceLinkedRole",
+
+      # Needed if using IAM DB authentication
+      "iam:PassRole",
+      "iam:GetRole",
+      "iam:ListRoles",
+
+      # Useful for enhanced monitoring
+      "cloudwatch:PutMetricData",
+      "cloudwatch:GetMetricData",
+      "cloudwatch:ListMetrics",
+
+      # This helps with various resource discovery that Terraform relies on
+      "rds:DescribeOptionGroups"
 
     ]
     resources = ["*"]
