@@ -53,4 +53,5 @@ resource "aws_db_instance" "main" {
   tags = {
     Name = "${local.prefix}-main"
   }
+  
 }
