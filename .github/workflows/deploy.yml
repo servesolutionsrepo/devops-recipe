@@ -61,5 +61,4 @@ jobs:
           workspace=$(cat .workspace)
           cd infra/
           docker compose run --rm terraform -chdir=deploy/ init
-
           docker compose run --rm terraform -chdir=deploy/ apply -auto-approve
